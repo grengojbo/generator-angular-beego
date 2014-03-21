@@ -108,7 +108,7 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.template('_bower.json', 'bower.json');
   this.template('bowerrc', '.bowerrc');
   this.template('Gruntfile.js', 'Gruntfile.js');
-  this.copy('gitignore', '.gitignore');
+  this.template('_gitignore', 'gitignore');
 
   var confDir = 'conf/'
   var controllerDir = 'controllers/'
@@ -132,8 +132,8 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.template('conf/_locale_ua-UA.ini', confDir + 'locale_ua-UA.ini');
   this.template('controllers/_default.go', controllerDir + 'default.go');
   this.template('controllers/_example.go', controllerDir + 'example.go');
-  this.template('models/_user.go', controllerDir + 'user.go');
-  this.template('models/_example.go', controllerDir + 'example.go');
+  this.template('models/_user.go', modelsDir + 'user.go');
+  this.template('models/_example.go', modelsDir + 'example.go');
   this.template('routers/_router.go', routesDir + 'router.go');
   this.template('views/_index.tpl', viewsDir + 'index.tpl');
 

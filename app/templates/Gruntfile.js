@@ -48,13 +48,13 @@ module.exports = function (grunt) {
 				{
 					context: '/<%= baseName %>',
 					host: 'localhost',
-					port: 3000,
+					port: <%= appPort %>,
 					https: false,
 					changeOrigin: false
 				}
 			],
 			options: {
-				port: <%= appPort %>,
+				port: 3000,
 				// Change this to '0.0.0.0' to access the server from outside.
 				hostname: 'localhost',
 				livereload: 35729

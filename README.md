@@ -20,7 +20,13 @@ Install the Angular-Go-Martini generator:
 
 In a new directory, generate the service:
 
-    yo angular-beego
+    mkdir <myapp> && cd <myapp>
+    yo beego
+    git init
+    git add -A
+    git commit -a -m "first commit"
+    git remote add origin git@github.com:<LOGIN>/<myapp>.git
+    git push -u origin master
 
 Get the dependencies:
 

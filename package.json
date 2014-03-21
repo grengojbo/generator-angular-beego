@@ -1,6 +1,6 @@
 {
 	"name": "generator-beego",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "A Yeoman generator for AngularJS + Go + Beego + MySQL",
 	"keywords": [
 		"yeoman-generator",
