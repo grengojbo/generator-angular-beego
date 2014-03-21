@@ -138,6 +138,7 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.template('views/_index.tpl', viewsDir + 'index.tpl');
 
   var publicCssDir = publicDir + 'css/';
+  var publicLessDir = publicDir + 'less/';
   var publicJsDir = publicDir + 'js/';
   var publicViewDir = publicDir + 'views/';
   this.mkdir(publicCssDir);
@@ -145,7 +146,11 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.mkdir(publicViewDir);
   this.template('views/_index.tpl', publicViewDir + 'index.tpl');
   this.copy('static/css/app.css', publicCssDir + 'app.css');
-  this.template('static/js/_app.js', publicJsDir + 'app.js');
+  this.copy('static/less/variables.less', publicLessDir + 'variables.less');
+  this.copy('static/less/mixins.less', publicLessDir + 'mixins.less');
+  this.copy('static/less/aplication.less', publicLessDir + 'aplication.less');
+  this.template('static/js/_app.js', publicJsDir + 'app.old.js');
+  this.template('static/js/_app.coffee', publicJsDir + 'app.coffee');
   this.template('static/js/home/_home-controller.js', publicJsDir + 'home/home-controller.js');
   this.template('static/views/home/_home.html', publicViewDir + 'home/home.html');
 };

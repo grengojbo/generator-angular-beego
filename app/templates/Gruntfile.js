@@ -33,7 +33,15 @@ module.exports = function (grunt) {
 					'<%%= yeoman.app %>/views/**/*'
 				]
 				//tasks: ['sync:dist']
-			}
+			},
+			coffee: {
+        // tasks: ['coffee:dist'],
+        files: ['<%= yeoman.app %>/static/js/{,*/}*.coffee']
+      }
+      less: {
+        tasks: ['less:dev', , 'autoprefixer'],
+        files: ['<%= yeoman.app %>/static/less/{,*/}*.less']
+      }
 		},
 		connect: {
 			proxies: [
@@ -73,6 +81,52 @@ module.exports = function (grunt) {
 			}
 			*/
 		},
+		less: {
+      dev: {
+        files: [
+          {'.tmp/static/css/aplication.css': '<%= yeoman.app %>/static/less/aplication.less'},
+          {'.tmp/static/css/bootstrap.css': '<%= yeoman.app %>/static/less/bootstrap.less'}
+        ],
+        options: {
+        	paths: ['<%= yeoman.app %>/static/less']
+      	}
+      },
+      dist: {
+        options: {
+          paths: ['<%= yeoman.app %>/static/less'],
+          yuicompress: true
+        },
+        files: [
+          {'.tmp/static/css/aplication.css': '<%= yeoman.app %>/static/less/aplication.less'},
+          {'.tmp/static/css/bootstrap.css': '<%= yeoman.app %>/static/less/bootstrap.less'}
+        ]
+      }
+    },
+    coffee: {
+      options: {
+        sourceMap: true,
+        sourceRoot: ''
+      },
+      dist: {
+        files: [{
+          // rather than compiling multiple files here you should
+          // require them into your main .coffee file
+          expand: true,
+          cwd: '<%= yeoman.app %>/static/js',
+          src: '{,*/}*.coffee',
+          dest: '.tmp/static/js',
+          ext: '.js'
+        }]
+      },
+      test: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/spec',
+          src: '{,*/}*.coffee',
+          dest: 'test/spec'
+        }]
+      }
+    },
 		// Put files not handled in other tasks here
 		copy: {
 			dist: {
