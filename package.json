@@ -1,7 +1,7 @@
 {
-	"name": "generator-angular-beego",
-	"version": "0.1.3",
-	"description": "A Yeoman generator for AngularJS + Go + Beego",
+	"name": "generator-beego",
+	"version": "0.1.4",
+	"description": "A Yeoman generator for AngularJS + Go + Beego + MySQL",
 	"keywords": [
 		"yeoman-generator",
 		"go",
@@ -11,17 +11,17 @@
 		"AngularJS",
 		"Twitter Bootstrap"
 	],
-	"homepage": "https://github.com/ninnemana/generator-angular-beego",
-	"bugs": "https://github.com/ninnemana/generator-angular-beego/issues",
+	"homepage": "https://github.com/grengojbo/generator-beego",
+	"bugs": "https://github.com/grengojbo/generator-beego/issues",
 	"author": {
-		"name": "Alex Ninneman",
+		"name": "Oleg Dolya",
 		"email": "",
-		"url": "https://github.com/ninnemana"
+		"url": "https://github.com/grengojbo"
 	},
 	"main": "app/index.js",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/ninnemana/generator-angular-beego.git"
+		"url": "git://github.com/grengojbo/generator-beego.git"
 	},
 	"scripts": {
 		"test": "mocha"

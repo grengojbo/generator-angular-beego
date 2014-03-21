@@ -14,7 +14,7 @@ Install Yeoman:
 
 Install the Angular-Go-Martini generator:
 
-    npm install -g generator-angular-beego
+    npm install -g generator-beego
 
 ## Creating a Beego service
 

@@ -4,5 +4,5 @@ node_js:
   - '0.8'
 before_install:
   - currentfolder=${PWD##*/}
-  - if [ "$currentfolder" != 'generator-angular-go-martini' ]; then cd .. && eval "mv $currentfolder generator-angular-go-martini" && cd generator-angular-go-martini; fi
+  - if [ "$currentfolder" != 'generator-beego' ]; then cd .. && eval "mv $currentfolder generator-beego" && cd generator-beego; fi
 
