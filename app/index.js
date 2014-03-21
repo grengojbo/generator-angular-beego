@@ -108,7 +108,7 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.template('_bower.json', 'bower.json');
   this.template('bowerrc', '.bowerrc');
   this.template('Gruntfile.js', 'Gruntfile.js');
-  this.template('_gitignore', 'gitignore');
+  this.template('_gitignore', '.gitignore');
 
   var confDir = 'conf/'
   var controllerDir = 'controllers/'
