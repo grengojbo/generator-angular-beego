@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= _.capitalize(baseName) %></title>
-  <link href="static/lib/bootstrap-css/css/bootstrap.css" rel="stylesheet">
+  <link href="static/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
   <link href="static/lib/jquery-ui/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
   <link href="static/css/app.css" rel="stylesheet">
 </head>
@@ -19,7 +19,7 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </button>
-       <a class="navbar-brand" href="#"><%= _.capitalize(baseName) %></a>
+       <a class="navbar-brand" href="#">{{<.Website>}}</a>
      </div>
 
      <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,7 +46,7 @@
   <script src="static/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="static/lib/angular-ui-date/src/date.js"></script>
 
-  <script src="static/js/app.js"></script>
+  <script src="static/js/app.old.js"></script>
   <script src="static/js/home/home-controller.js"></script>
   <% _.each(entities, function (entity) { %>
   <script src="static/js/<%= entity.name %>/<%= entity.name %>-controller.js"></script>

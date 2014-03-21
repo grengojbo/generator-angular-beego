@@ -37,7 +37,7 @@ module.exports = function (grunt) {
 			coffee: {
         // tasks: ['coffee:dist'],
         files: ['<%= yeoman.app %>/static/js/{,*/}*.coffee']
-      }
+      },
       less: {
         tasks: ['less:dev', , 'autoprefixer'],
         files: ['<%= yeoman.app %>/static/less/{,*/}*.less']
@@ -46,7 +46,7 @@ module.exports = function (grunt) {
 		connect: {
 			proxies: [
 				{
-					context: '/<%= baseName %>',
+					context: '/',
 					host: 'localhost',
 					port: <%= appPort %>,
 					https: false,

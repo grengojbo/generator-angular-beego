@@ -85,13 +85,15 @@ AngularGoMartiniGenerator.prototype.askFor = function askFor() {
     this.goBin = process.env.GOROOT+'/bin';
     this.baseDir = './';
     this.appPort = 8080;
+    this.modelName = 'Example';
+    this.autorName = 'Oleg Dolya';
     cb();
   }.bind(this));
 };
 
 AngularGoMartiniGenerator.prototype.app = function app() {
 
-  this.entities = [];
+  this.entities = ['home', 'name', 'contact'];
   this.resources = [];
   this.generatorConfig = {
     "baseName": this.baseName,
@@ -103,6 +105,8 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   };
   this.generatorConfigStr = JSON.stringify(this.generatorConfig, null, '\t');
 
+  this.template('_README.md', 'README.md');
+  this.template('_LICENSE', 'LICENSE');
   this.template('_generator.json', 'generator.json');
   this.template('_package.json', 'package.json');
   this.template('_bower.json', 'bower.json');

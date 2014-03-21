@@ -1,4 +1,4 @@
-// Copyright 2014 Oleg Dolya. All rights reserved.
+// Copyright 2014 <%= autorName %>. All rights reserved.
 // Use of this source code is governed by the MIT license
 // that can be found in the LICENSE file.
 package controllers
@@ -9,11 +9,11 @@ import (
   "strconv"
 )
 
-type ExampleServiceController struct {
+type <%= modelName %>ServiceController struct {
   baseController
 }
 
-func (this *ExampleServiceController) Get() {
+func (this *<%= modelName %>ServiceController) Get() {
   // page, _ := this.GetInt("page")
   // page_size, _ := this.GetInt("rows")
   sort := this.GetString("sort")
@@ -24,16 +24,16 @@ func (this *ExampleServiceController) Get() {
       sort = "-" + sort
     }
   } else {
-    sort = "ServiceId"
+    sort = "Id"
   }
-  beego.Debug("API ExampleServiceController metod GET isLogin: ", this.isLogin)
+  beego.Debug("API <%= modelName %>ServiceController metod GET isLogin: ", this.isLogin)
   objectId := this.Ctx.Input.Params[":objectId"]
   if this.isLogin {
     if objectId != "" {
       id, err := strconv.Atoi(objectId)
       if err == nil {
         // TODO: заменить function полчения одной записи
-        ob, err := models.GetExample(int64(id))
+        ob, err := models.Get<%= modelName %>(int64(id))
         if err != nil {
           mess := "Is not row ID:"
           this.Data["json"] = &map[string]interface{}{"error": true, "message": mess}
@@ -43,7 +43,7 @@ func (this *ExampleServiceController) Get() {
       }
     } else {
       // TODO: заменить function полчения списка записей
-      ob, cnt := models.GetPaysList(sort)
+      ob, cnt := models.Get<%= modelName %>List(sort)
       this.Data["json"] = &map[string]interface{}{"count": cnt, "next": nil, "previous": nil, "results": &ob}
     }
   } else {
