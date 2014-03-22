@@ -9,9 +9,7 @@
   <link href="static/lib/jquery-ui/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
   <link href="static/css/app.css" rel="stylesheet">
 </head>
-<body>
-{{<template "header.tpl" .>}}
-  <div class="container" ng-view></div>
+<body>  <div class="container" ng-view></div>
 {{<template "footer.tpl" .>}}
   <script src="static/lib/jquery/dist/jquery.js"></script>
   <script src="static/lib/jquery-ui/ui/jquery-ui.js"></script>

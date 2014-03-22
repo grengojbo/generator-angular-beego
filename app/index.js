@@ -93,7 +93,7 @@ AngularGoMartiniGenerator.prototype.askFor = function askFor() {
 
 AngularGoMartiniGenerator.prototype.app = function app() {
 
-  this.entities = ['home', 'name', 'contact'];
+  this.entities = [];
   this.resources = [];
   this.generatorConfig = {
     "baseName": this.baseName,

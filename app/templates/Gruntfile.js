@@ -188,7 +188,7 @@ module.exports = function (grunt) {
       options: {
         // Bower components folder will be removed afterwards
         // clean: true,
-        destPrefix: '<%= yeoman.app %>'
+        destPrefix: '<%%= yeoman.app %>'
       },
       test: {
         files: {
@@ -199,11 +199,11 @@ module.exports = function (grunt) {
     },
     open: {
             server: {
-                path: 'http://localhost:<%= connect.options.port %>'
+                path: 'http://localhost:<%%= connect.options.port %>'
             }
     },
     clean: {
-      tmp: ['.tmp/*.html', '.tmp/tpl', '.tmp/<%= yeoman.mobile %>'],
+      tmp: ['.tmp/*.html', '.tmp/tpl', '<%%= yeoman.mobile %>'],
       dist: ['.tmp', 'dist'],
       server: '.tmp'
     }
