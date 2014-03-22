@@ -25,11 +25,9 @@
      <!-- Collect the nav links, forms, and other content for toggling -->
      <div class="collapse navbar-collapse navbar-ex1-collapse">
        <ul class="nav navbar-nav">
-         <% _.each(entities, function (entity) { %>
          <li>
-         <a href="/#/<%= pluralize(entity.name) %>"><%= _.capitalize(pluralize(entity.name)) %></a>
+         <a href="/">Home</a>
          </li>
-         <% }); %>
        </ul>
      </div>
      <!-- /.navbar-collapse -->
