@@ -1,3 +1,6 @@
+// Copyright 2014 <%= autorName %>. All rights reserved.
+// Use of this source code is governed by the MIT license
+// that can be found in the LICENSE file.
 package routers
 
 import (
@@ -6,6 +9,6 @@ import (
 )
 
 func init(){
-  beego.RESTRouter("/api/v1/example", &controllers.ExampleServiceController{})
+  beego.RESTRouter("/api/v1/example", &controllers.<%= modelName %>ServiceController{})
 	beego.Router("/", &controllers.MainController{})
 }

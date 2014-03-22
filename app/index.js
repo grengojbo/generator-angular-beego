@@ -121,6 +121,10 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   var routesDir = 'routers/'
   var testsDir = 'tests/'
   var viewsDir = 'views/'
+  var appDir = 'app/'
+  var appStatic = 'app/static/'
+  var appLess = 'app/static/less/'
+  var appJs = 'app/static/js'
   this.mkdir(confDir);
   this.mkdir(controllerDir);
   this.mkdir(modelsDir);
@@ -128,6 +132,10 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.mkdir(routesDir);
   this.mkdir(testsDir);
   this.mkdir(viewsDir);
+  this.mkdir(appDir);
+  this.mkdir(appStatic);
+  this.mkdir(appLess);
+  this.mkdir(appJs);
 
   this.template('_main.go', 'main.go');
   this.template('_bee.json', 'bee.json');
@@ -152,9 +160,9 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.copy('static/css/app.css', publicCssDir + 'app.css');
   this.copy('static/less/variables.less', publicLessDir + 'variables.less');
   this.copy('static/less/mixins.less', publicLessDir + 'mixins.less');
-  this.copy('static/less/aplication.less', publicLessDir + 'aplication.less');
+  this.copy('static/less/aplication.less', appLess + 'aplication.less');
   this.template('static/js/_app.js', publicJsDir + 'app.old.js');
-  this.template('static/js/_app.coffee', publicJsDir + 'app.coffee');
+  this.template('static/js/_app.coffee', appJs + 'app.coffee');
   this.template('static/js/home/_home-controller.js', publicJsDir + 'home/home-controller.js');
   this.template('static/views/home/_home.html', publicViewDir + 'home/home.html');
 };
