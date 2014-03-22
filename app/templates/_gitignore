@@ -5,6 +5,7 @@
 *.o
 *.a
 *.so
+*.dmp
 
 # Folders
 _obj
@@ -26,3 +27,4 @@ tmp/
 node_modules
 <%= _.camelize(baseName) %>
 <%= _.camelize(baseName) %>.exe
+static/lib/

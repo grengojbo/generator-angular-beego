@@ -10,33 +10,9 @@
   <link href="static/css/app.css" rel="stylesheet">
 </head>
 <body>
- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-   <div class="container">
-     <div class="navbar-header">
-       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-         <span class="sr-only">Toggle navigation</span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-       </button>
-       <a class="navbar-brand" href="#">{{<.Website>}}</a>
-     </div>
-
-     <!-- Collect the nav links, forms, and other content for toggling -->
-     <div class="collapse navbar-collapse navbar-ex1-collapse">
-       <ul class="nav navbar-nav">
-         <% _.each(entities, function (entity) { %>
-         <li>
-         <a href="/#/<%= pluralize(entity.name) %>"><%= _.capitalize(pluralize(entity.name)) %></a>
-         </li>
-         <% }); %>
-       </ul>
-     </div>
-     <!-- /.navbar-collapse -->
-   </div>
-   <!-- /.container -->
-  </nav>
+{{<template "header.tpl" .>}}
   <div class="container" ng-view></div>
+{{<template "footer.tpl" .>}}
   <script src="static/lib/jquery/dist/jquery.js"></script>
   <script src="static/lib/jquery-ui/ui/jquery-ui.js"></script>
   <script src="static/lib/lodash/dist/lodash.js"></script>

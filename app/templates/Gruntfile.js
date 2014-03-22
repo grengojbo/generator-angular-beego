@@ -72,9 +72,10 @@ module.exports = function (grunt) {
         tasks: ['livereload'],
         files: [
           '{.tmp,<%%= yeoman.app %>}/views/*.{html,htm,tpl}',
-          '{.tmp,<%%= yeoman.app %>}/static/css/{,*/}*.css',
-          '{.tmp,<%%= yeoman.app %>}/static/js/{,*/}*.js',
-          '{.tmp,<%%= yeoman.app %>}/static/img/{,*/}*.{png,jpg,jpeg,gif,webp}'
+          'views/*.{html,htm,tpl}',
+          'static/css/{,*/}*.css',
+          'static/js/{,*/}*.js',
+          'static/img/{,*/}*.{png,jpg,jpeg,gif,webp}'
         ]
       },
     },
@@ -106,7 +107,7 @@ module.exports = function (grunt) {
             // return [lrSnippet, mountFolder(connect, '.tmp'), mountFolder(connect, '.')];
             // return [lrSnippet, proxySnippet, mountFolder(connect, '.tmp'), mountFolder(connect, '.')];
             // return [proxySnippet, connect.static(require('path').resolve('.tmp'))];
-            return [proxySnippet, connect.static(require('path').resolve('public'))];
+            return [lrSnippet, proxySnippet, connect.static(require('path').resolve('.'))];
           }
         }
       },
@@ -149,9 +150,9 @@ module.exports = function (grunt) {
           // rather than compiling multiple files here you should
           // require them into your main .coffee file
           expand: true,
-          cwd: '/static/js',
+          cwd: '<%%= yeoman.app %>/static/js',
           src: '{,*/}*.coffee',
-          dest: '.tmp/static/js',
+          dest: 'static/js',
           ext: '.js'
         }]
       },

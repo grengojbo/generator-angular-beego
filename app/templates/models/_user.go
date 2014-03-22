@@ -17,7 +17,7 @@ type User struct {
 	Password    string    `orm:"size(128)" json:"-"`
 	LastLogin   time.Time `orm:"column(last_login);type(datetime)"`
 	IsSuperuser int8      `orm:"column(is_superuser)"`
-	Username    string    `orm:"size(30)" valid:"Required;MaxSize(30);MinSize(6)"`
+	Username    string    `orm:"size(30);unique;index" valid:"Required;MaxSize(30);MinSize(6)"`
 	FirstName   string    `orm:"size(30);column(first_name)"`
 	LastName    string    `orm:"size(30);column(last_name)"`
 	Email       string    `orm:"size(75)"`

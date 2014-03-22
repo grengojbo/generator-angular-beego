@@ -50,7 +50,13 @@ func (this *baseController) Prepare() {
     this.SetSession("_auth_user_id", this.userId)
     sId = "-1"
   } else {
-    this.userId, _ = strconv.Atoi(sId.(string))
+    beego.Debug("session ID:", sId)
+    if str, ok := sId.(string); ok {
+      this.userId, _ = strconv.Atoi(str)
+    } else {
+      this.userId = sId.(int)
+      // this.userId, _ = strconv.Atoi(sId.(string))
+    }
   }
   u, err := models.GetUser(this.userId)
   if err == nil {
@@ -84,12 +90,14 @@ func (this *baseController) Prepare() {
 }
 
 type MainController struct {
-  // baseController
-  beego.Controller
+  baseController
+  // beego.Controller
 }
 
 func (this *MainController) Get() {
   this.Data["Website"] = "beego.me"
+  this.Data["AppUrl"] = '/'
+  this.Data["IsHome"] = true
   this.Data["Email"] = "astaxie@gmail.com"
   this.TplNames = "index.tpl"
 }

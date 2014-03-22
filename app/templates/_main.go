@@ -1,3 +1,6 @@
+// Copyright 2014 <%= autorName %>. All rights reserved.
+// Use of this source code is governed by the MIT license
+// that can be found in the LICENSE file.
 package main
 
 import (
@@ -15,9 +18,9 @@ func init() {
   // param 4 (optional):  set maximum connections (go >= 1.2)
   maxIdle := 30
   maxConn := 30
-  // conn := beego.AppConfig.String("mysqluser") + ":" + beego.AppConfig.String("mysqlpass") + "@tcp(" + beego.AppConfig.String("mysqlurls") + ":" + beego.AppConfig.String("mysqlport") + ")/" + beego.AppConfig.String("mysqldb") + "?charset=utf8"
+  conn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8", beego.AppConfig.String("mysqluser"), beego.AppConfig.String("mysqlpass"), beego.AppConfig.String("mysqlurls"), beego.AppConfig.String("mysqlport"), beego.AppConfig.String("mysqldb"))
   // orm.RegisterDataBase("default", "mysql", conn, maxIdle, maxConn)
-  orm.RegisterDataBase("default", "mysql", "<name>:<pass>@tcp(<ip>:3306)/<db>?charset=utf8", maxIdle, maxConn)
+  orm.RegisterDataBase("default", "mysql", conn, maxIdle, maxConn)
 }
 
 //    Objects
@@ -29,6 +32,7 @@ func init() {
 //  /object/<objectId>  DELETE          Deleting Objects
 
 func main() {
+  beego.SetStaticPath("/media", "media")
   if beego.AppConfig.String("runmode") == "dev" {
     beego.SetLevel(beego.LevelDebug)
     orm.Debug = true
@@ -37,5 +41,6 @@ func main() {
   }
   beego.AddFuncMap("i18n", i18n.Tr)
   orm.DefaultTimeLoc = time.UTC
+  orm.RunCommand()
   beego.Run()
 }
