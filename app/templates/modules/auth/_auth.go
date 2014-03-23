@@ -16,7 +16,7 @@ import (
 
 	"github.com/grengojbo/beego/modules/utils"
 	// "github.com/beego/wetalk/setting"
-	"myapp/models"
+	"<%= _.slugify(baseName) %>/models"
 )
 
 // check if exist user by username or email

@@ -11,4 +11,5 @@ import (
 func init(){
   beego.RESTRouter("/api/v1/example", &controllers.<%= modelName %>ServiceController{})
 	beego.Router("/", &controllers.MainController{})
+  // addController
 }

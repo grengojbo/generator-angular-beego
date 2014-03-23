@@ -24,7 +24,10 @@ Generator.prototype.createControllerFiles = function createControllerFiles() {
   // this.modelName = this.name;
   this.autorName = 'Oleg Dolya';
   // this.sname = this._.slugify(this.name);
-  this.template('controllers/_auth.go', controllerDir + 'auth.go');
+  var maDir = this.modulesDir + 'auth/';
+  this.mkdir(maDir);
+  this.template(maDir + '_auth.go', maDir + 'auth.go');
+  this.template(maDir + '_form.go', maDir + 'form.go');
   // this.appTemplate('service/factory', 'scripts/services/' + this.name);
   // this.testTemplate('spec/service', 'services/' + this.name);
   // this.addScriptToIndex('services/' + this.name);
