@@ -144,8 +144,12 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.template('conf/_locale_ua-UA.ini', confDir + 'locale_ua-UA.ini');
   this.template('controllers/_default.go', controllerDir + 'default.go');
   this.template('controllers/_example.go', controllerDir + 'example.go');
+  this.template('controllers/_home.go', controllerDir + 'home.go');
   this.template('models/_user.go', modelsDir + 'user.go');
   this.template('models/_example.go', modelsDir + 'example.go');
+  this.copy('models/orm_fields.go', modelsDir + 'orm_fields.go');
+  this.copy('models/orm_helper.go', modelsDir + 'orm_helper.go');
+  // this.copy('models/', modelsDir + '');
   this.template('routers/_router.go', routesDir + 'router.go');
   this.template('views/_index.tpl', viewsDir + 'index.tpl');
   this.template('views/_header.tpl', viewsDir + 'header.tpl');

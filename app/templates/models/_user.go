@@ -7,8 +7,7 @@ import (
 	"errors"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	// "github.com/astaxie/beego/validation"
-	// "strconv"
+	"github.com/grengojbo/beego/modules/utils"
 	"time"
 )
 
@@ -24,6 +23,9 @@ type User struct {
 	IsStaff     int8      `orm:"column(is_staff)"`
 	IsActive    int8      `orm:"column(is_active)"`
 	DateJoined  time.Time `orm:"column(date_joined);type(datetime)"`
+	Lang        int       `orm:"-"`
+	// Rands       string    `orm:"size(10);null"`
+	// Lang        int       `orm:"index;null"`
 }
 
 func (u *User) TableName() string {
@@ -94,6 +96,25 @@ func GetUser(userId int) (user User, err error) {
 	} else {
 		return user, nil
 	}
+}
+
+// return a user salt token
+func GetUserSalt() string {
+	return utils.GetRandomString(10)
+}
+
+func (m *User) Read(fields ...string) error {
+	if err := orm.NewOrm().Read(m, fields...); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *User) Update(fields ...string) error {
+	if _, err := orm.NewOrm().Update(m, fields...); err != nil {
+		return err
+	}
+	return nil
 }
 
 func init() {

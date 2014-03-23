@@ -1,0 +1,8 @@
+Description:
+    Creates a new Beego  Auth controller
+
+Example:
+    yo begoo:auth
+
+    This will create:
+        app/scripts/controllers/auth.go

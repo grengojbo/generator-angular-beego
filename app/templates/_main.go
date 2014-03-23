@@ -4,13 +4,13 @@
 package main
 
 import (
+  "fmt"
   "github.com/astaxie/beego"
   "github.com/astaxie/beego/orm"
   "github.com/beego/i18n"
   _ "github.com/go-sql-driver/mysql"
-	_ "<%= baseName %>/routers"
+  _ "<%= baseName %>/routers"
   "time"
-  "fmt"
 )
 
 func init() {
