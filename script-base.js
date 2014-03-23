@@ -9,6 +9,11 @@ module.exports = Generator;
 function Generator() {
   yeoman.generators.NamedBase.apply(this, arguments);
 
+  this.modelsDir = 'models/';
+  this.modulesDir = 'modules/'
+  this.mkdir(modelsDir);
+  this.mkdir(modulesDir);
+
   try {
     this.appname = require(path.join(process.cwd(), 'bower.json')).name;
   } catch (e) {
