@@ -1,0 +1,8 @@
+Description:
+    Creates a new Beego controller
+
+Example:
+    yo begoo:controller Thing 
+
+    This will create:
+        app/scripts/controllers/thing.g

@@ -10,6 +10,7 @@ import (
   _ "github.com/go-sql-driver/mysql"
 	_ "<%= baseName %>/routers"
   "time"
+  "fmt"
 )
 
 func init() {
