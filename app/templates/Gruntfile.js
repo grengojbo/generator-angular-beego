@@ -31,8 +31,8 @@ module.exports = function (grunt) {
       }
     },
     shell: {
-      run: {
-        command: 'bee run',
+      lib: {
+        command: 'go get',
         options: {
           stdout: true,
           stderr: true
