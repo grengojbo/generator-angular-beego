@@ -20,7 +20,7 @@ type <%= modelName %> struct {
 }
 
 func (o *<%= modelName %>) TableName() string {
-	return "example"
+	return "<%= _.slugify(baseName) %>"
 }
 
 func Get<%= modelName %>(ObjectId int64) (object <%= modelName %>, err error) {

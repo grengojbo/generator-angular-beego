@@ -143,10 +143,10 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.template('conf/_locale_en-US.ini', confDir + 'locale_en-US.ini');
   this.template('conf/_locale_ua-UA.ini', confDir + 'locale_ua-UA.ini');
   this.template('controllers/_default.go', controllerDir + 'default.go');
-  this.template('controllers/_example.go', controllerDir + 'example.go');
+  // this.template('controllers/_example.go', controllerDir + 'example.go');
   this.template('controllers/_home.go', controllerDir + 'home.go');
   this.template('models/_user.go', modelsDir + 'user.go');
-  this.template('models/_example.go', modelsDir + 'example.go');
+  // this.template('models/_example.go', modelsDir + 'example.go');
   this.copy('models/orm_fields.go', modelsDir + 'orm_fields.go');
   this.copy('models/orm_helper.go', modelsDir + 'orm_helper.go');
   // this.copy('models/', modelsDir + '');
@@ -163,7 +163,7 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.mkdir(publicCssDir);
   this.mkdir(publicJsDir);
   this.mkdir(publicViewDir);
-  this.template('views/_index.tpl', publicViewDir + 'index.tpl');
+  // this.template('views/_index.tpl', publicViewDir + 'index.tpl');
   this.copy('static/css/app.css', publicCssDir + 'app.css');
   this.copy('static/less/variables.less', appLess + 'variables.less');
   this.copy('static/less/mixins.less', appLess + 'mixins.less');

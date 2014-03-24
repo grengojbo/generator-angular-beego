@@ -4,4 +4,7 @@
 
 ```bash
 npm install && bower install
+grunt shell:get
+yo beego:api Post
+
 ```

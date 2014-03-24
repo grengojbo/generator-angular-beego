@@ -29,5 +29,5 @@ Generator.prototype.createControllerFiles = function createControllerFiles() {
   this.template('models/_example.go', modelsDir + this.sname + '.go');
   // this.appTemplate('service/factory', 'scripts/services/' + this.name);
   // this.testTemplate('spec/service', 'services/' + this.name);
-  // this.addScriptToIndex('services/' + this.name);
+  this.addScriptToIndex(this.sname);
 };

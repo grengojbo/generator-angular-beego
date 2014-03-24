@@ -115,3 +115,19 @@ Generator.prototype.addScriptToIndex = function (script) {
     console.log('\nUnable to find '.yellow + fullPath + '. Reference to '.yellow + script + '.js ' + 'not added.\n'.yellow);
   }
 };
+
+Generator.prototype.addApiToRoute = function (script) {
+  try {
+    var appPath = this.env.options.appPath;
+    var fullPath = path.join(appPath, 'router.go');
+    angularUtils.rewriteFile({
+      file: fullPath,
+      needle: '// addController',
+      splicable: [
+        'beego.RESTRouter("/api/v1/'+ script +'", &controllers.<%= modelName %>ServiceController{})\n\t// addController'
+      ]
+    });
+  } catch (e) {
+    console.log('\nUnable to find '.yellow + fullPath + '. Reference to '.yellow + script + '.js ' + 'not added.\n'.yellow);
+  }
+};
