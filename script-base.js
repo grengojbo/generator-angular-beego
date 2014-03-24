@@ -11,8 +11,8 @@ function Generator() {
 
   this.modelsDir = 'models/';
   this.modulesDir = 'modules/'
-  this.mkdir(modelsDir);
-  this.mkdir(modulesDir);
+  this.mkdir(this.modelsDir);
+  this.mkdir(this.modulesDir);
 
   try {
     this.appname = require(path.join(process.cwd(), 'bower.json')).name;

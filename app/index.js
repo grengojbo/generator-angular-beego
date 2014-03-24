@@ -140,6 +140,7 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.template('_main.go', 'main.go');
   this.template('_bee.json', 'bee.json');
   this.template('conf/_app.conf', confDir + 'app.conf');
+  this.template('conf/_libs.json', confDir + 'libs.json');
   this.template('conf/_locale_en-US.ini', confDir + 'locale_en-US.ini');
   this.template('conf/_locale_ua-UA.ini', confDir + 'locale_ua-UA.ini');
   this.template('controllers/_default.go', controllerDir + 'default.go');

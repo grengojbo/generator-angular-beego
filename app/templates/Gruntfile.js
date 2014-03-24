@@ -16,6 +16,8 @@ module.exports = function (grunt) {
       // configurable paths
       // app: require('./bower.json').appPath || 'public',
       app: 'app',
+      gen: grunt.file.readJSON('generator.json'),
+      // lib: grunt.file.readJSON('conf/lib.json'),
       dist: 'public'
     },
     livereload: {
@@ -31,8 +33,29 @@ module.exports = function (grunt) {
       }
     },
     shell: {
-      lib: {
+      get: {
         command: 'go get',
+        options: {
+          stdout: true,
+          stderr: true
+          // execOptions: {
+          //   encoding: 'windows-1251',
+          //   env: {
+          //     Gopath: 'F:/home/jbo/src/repo-git/sssua-app'
+          //   }
+          // }
+        }
+      },
+      wget: {
+        command: [
+          'go get github.com/astaxie/beego/validation',
+          'go get github.com/beego/i18n',
+          'go get github.com/beego/wetalk/modules/utils',
+          'go get github.com/astaxie/beego/context',
+          'go get -u github.com/beego/social-auth',
+          'go get github.com/astaxie/beego/cache',
+          'go get github.com/grengojbo/beego/modules/utils'
+          ].join(';'),
         options: {
           stdout: true,
           stderr: true
@@ -71,7 +94,7 @@ module.exports = function (grunt) {
       livereload: {
         tasks: ['livereload'],
         files: [
-          '{.tmp,<%%= yeoman.app %>}/views/*.{html,htm,tpl}',
+          '<%%= yeoman.app %>/views/*.{html,htm,tpl}',
           'views/*.{html,htm,tpl}',
           'static/css/{,*/}*.css',
           'static/js/{,*/}*.js',
@@ -101,7 +124,7 @@ module.exports = function (grunt) {
           // open: true,
           // base: [
             // '.tmp'
-            // '<%= yeoman.app %>'
+            // ''
           // ],
           middleware: function (connect) {
             // return [lrSnippet, mountFolder(connect, '.tmp'), mountFolder(connect, '.')];
@@ -184,6 +207,12 @@ module.exports = function (grunt) {
         singleRun: true
       }
     },
+    bowerInstall: {
+      target: {
+        src: ['views/index.tpl'],
+        ignorePath: '../'
+      }
+    },
     bowercopy: {
       options: {
         // Bower components folder will be removed afterwards
@@ -198,13 +227,59 @@ module.exports = function (grunt) {
       }
     },
     open: {
-            server: {
-                path: 'http://localhost:<%%= connect.options.port %>'
-            }
+      server: {
+        path: 'http://localhost:<%%= connect.options.port %>'
+      }
     },
+    // jshint: {
+    //   options: {
+    //             jshintrc: '.jshintrc'
+    //         },
+    //         dev: [
+    //             'Gruntfile.js',
+    //             './tmp/static/js/{,*/}*.js'
+    //         ],
+    //         all: [
+    //             'Gruntfile.js',
+    //             './tmp/static/js/{,*/}*.js',
+    //             '<%%= yeoman.app %>/static/js/{,*/}*.js',
+    //             '!<%%= yeoman.app %>/static/js/vendor/*',
+    //             'test/spec/{,*/}*.js'
+    //         ]
+    // },
+    // useminPrepare: {
+    //         html: 'dist/base.html',
+    //         options: {
+    //             dest: 'dist'
+    //         }
+    //     },
+    //     usemin: {
+    //         // html: ['dist/{,*/}*.html'],  // INFO minimize all files
+    //         html: ['dist/tpl-home.html', 'dist/base.html'],  // INFO minimize only base.html
+    //         // html: ['dist/base.html'],  // INFO minimize only base.html
+    //         css: ['dist/static/css/{,*/}*.css'],
+    //         options: {
+    //             // dirs: ['dist'] // NO REV
+    //             assetsDirs: ['dist'] // REVISON big time
+    //         }
+    //     },
+    //     imagemin: {
+    //         dist: {
+    //             files: [{
+    //                 expand: true,
+    //                 cwd: '<%%= yeoman.app %>/static/img',
+    //                 src: '{,*/}*.{png,jpg,jpeg}',
+    //                 dest: '<%%= yeoman.dist %>/img'
+    //             }]
+    //         }
+    //     },
     clean: {
-      tmp: ['.tmp/*.html', '.tmp/tpl', '<%%= yeoman.mobile %>'],
-      dist: ['.tmp', 'dist'],
+      tmp: ['.tmp/*.html', '.tmp/tpl', '.tmp/<%%= yeoman.mobile %>'],
+      dist: ['.tmp', 'dist', '*.dmp'],
+      minifier: [
+        '<%%= yeoman.app %>/css/*.{style,bootstrap,font-awesome}.css',
+        '<%%= yeoman.app %>/js/*.{jquery.min,vendor,main,angular-lib}.js'
+      ],
       server: '.tmp'
     }
   });
@@ -214,6 +289,7 @@ module.exports = function (grunt) {
   grunt.registerTask('server', function (target) {
     grunt.task.run([
       'clean:server',
+      // 'clean:minifier',
       'coffee:dist',
       'less:dev',
       'livereload-start',
