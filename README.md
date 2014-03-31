@@ -30,7 +30,8 @@ In a new directory, generate the service:
 
 Get the dependencies:
 
-    go get
+    go get -u github.com/gpmgo/gopm
+    gopm get -g
 
 Run the service:
 
@@ -43,4 +44,15 @@ Run the service:
 Your service will run at [http://localhost:8080](http://localhost:8080).
 
 The Grunt server supports hot reloading of client-side HTML/CSS/Javascript file changes.
+
+## For developer
+
+go get github.com/nsf/gocode
+go get code.google.com/p/go.tools/godoc
+go get code.google.com/p/go.tools/cmd/godoc
+go get code.google.com/p/go.tools/cmd/goimports
+
+
+### Разработка с помощью Sublime Text 3 + GoSublime + goimports
+Now opening the settings file will succeed. The only thing left is to set the "fmt_cmd" option to ["goimports"], and you're done!
 

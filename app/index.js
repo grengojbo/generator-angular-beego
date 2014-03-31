@@ -113,6 +113,7 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.template('bowerrc', '.bowerrc');
   this.template('Gruntfile.js', 'Gruntfile.js');
   this.template('_gitignore', '.gitignore');
+  this.template('_gopmfile', '.gopmfile');
 
   var confDir = 'conf/'
   var controllerDir = 'controllers/'
@@ -125,6 +126,8 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   var appStatic = 'app/static/'
   var appLess = 'app/static/less/'
   var appJs = 'app/static/js/'
+  var appJsControllers = 'app/static/js/controllers'
+  var appViewsDir = 'app/views/'
   this.mkdir(confDir);
   this.mkdir(controllerDir);
   this.mkdir(modelsDir);
@@ -136,6 +139,8 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.mkdir(appStatic);
   this.mkdir(appLess);
   this.mkdir(appJs);
+  this.mkdir(appJsControllers);
+  this.mkdir(appViewsDir)
 
   this.template('_main.go', 'main.go');
   this.template('_bee.json', 'bee.json');
@@ -152,6 +157,9 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.copy('models/orm_helper.go', modelsDir + 'orm_helper.go');
   // this.copy('models/', modelsDir + '');
   this.template('routers/_router.go', routesDir + 'router.go');
+  this.template('views/_base.tpl', appViewsDir + 'base.tpl');
+  this.template('views/_header.tpl', appViewsDir + 'header.tpl');
+  this.template('views/_footer.tpl', appViewsDir + 'footer.tpl');
   this.template('views/_index.tpl', viewsDir + 'index.tpl');
   this.template('views/_header.tpl', viewsDir + 'header.tpl');
   this.template('views/_footer.tpl', viewsDir + 'footer.tpl');
@@ -169,7 +177,8 @@ AngularGoMartiniGenerator.prototype.app = function app() {
   this.copy('static/less/variables.less', appLess + 'variables.less');
   this.copy('static/less/mixins.less', appLess + 'mixins.less');
   this.copy('static/less/aplication.less', appLess + 'aplication.less');
-  this.template('static/js/_app.js', publicJsDir + 'app.old.js');
+  this.template('static/js/controllers/_home.coffee', appJsControllers + 'home.coffee');
+  this.template('static/js/controllers/_main.coffee', appJsControllers + 'main.coffee');
   this.template('static/js/_app.coffee', appJs + 'app.coffee');
   this.template('static/js/home/_home-controller.js', publicJsDir + 'home/home-controller.js');
   this.template('static/views/home/_home.html', publicViewDir + 'home/home.html');

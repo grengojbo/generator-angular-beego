@@ -1,0 +1,13 @@
+[target]
+path=<%= _.slugify(baseName) %>
+
+[deps]
+github.com/astaxie/beego =
+github.com/beego/i18n =
+github.com/go-sql-driver/mysql =
+github.com/grengojbo/beego =
+bitbucket.org/liamstask/goose/cmd/goose =
+
+[res]
+include = views|static|conf
+

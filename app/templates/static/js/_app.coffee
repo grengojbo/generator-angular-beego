@@ -3,25 +3,33 @@
 
 window.app = angular.module('<%= baseName %>', [
   'ngRoute',
-  'ngMockE2E',
+  # 'ngMockE2E',
   'ngCookies',
   'ngResource',
   'ngSanitize',
   # 'ui.bootstrap',
   # 'ui.router',
-  # 'ngRoute',
+  'ngRoute',
   'chieffancypants.loadingBar',
-  # 'ngAnimate',
+  'ngAnimate',
   'ui.date'
-])
+  ])
 
 
-app.config(['$routeProvider', ($routeProvider) ->
+# app.config(['$routeProvider', ($routeProvider) ->
+#   $routeProvider
+#     .when '/aaa',
+#       redirectTo: '/'
+#     .otherwise redirectTo: '/'
+#   return false
+# ])
+
+app.config ['$routeProvider', ($routeProvider) ->
   $routeProvider
-    .when '/aaa',
-    redirectTo: '/'
-    .otherwise redirectTo: '/'
+    .when '/',
+      templateUrl: '/static/views/home/home.html',
+      controller: 'HomeCtrl'
   return false
-])
+]
 
 #VideoController.$inject = ['$scope', 'Video'];

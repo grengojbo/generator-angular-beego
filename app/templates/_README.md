@@ -1,9 +1,12 @@
 # <%= _.camelize(baseName) %>
 
 ## Installation <%= _.camelize(baseName) %>
+ Download mercurial http://mercurial.selenic.com/downloads
+ Install mercurial 
 
 ```shell
-npm install && bower install
+go get github.com/mattn/gom
+npm install && bower install && gom install
 grunt shell:get
 yo beego:api Post
 

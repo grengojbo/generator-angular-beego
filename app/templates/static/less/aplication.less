@@ -39,7 +39,7 @@ header {
 }
 /* Login or Register */
 
-
+/* AngularJS Animate */
 // .excerpet.ng-hide-add {
 //   .ng-animate-hide-opacity(0, 2);
 //   display: block !important;
@@ -52,12 +52,34 @@ header {
 .jbo-fade.ng-hide-remove { opacity: 0; display: block !important; transition: opacity 2s; }
 .jbo-fade.ng-hide-remove-active { opacity: 1.0; display: block !important; transition: opacity 2s; }
 
+/* YouTube */
+.video-content {
+  position:relative;
+  z-index:1;
+  &:before {
+    content: url('../img/ty.png');
+    z-index: 100;
+    position:absolute;
+    filter: alpha(opacity=80);
+    opacity: .8;
+    -webkit-transition: opacity 400ms;
+    -moz-transition: opacity 400ms;
+    -o-transition: opacity 400ms;
+    transition: opacity 400ms;
+  }
+  &:hover:before {
+    filter: alpha(opacity=100);
+    opacity: 1;
+  }
+}
+
 /* Mobile */
-// @media (max-width:  @screen-xs-max) {
-//   .jbo-slider {
-//     margin-top: 0px;
-//   }
-// }
+@media (max-width:  @screen-xs-max) {
+  body {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
 // @media (min-width: @screen-sm-min) {
 //   .timeline-panel {
 //     min-height: 270px;
