@@ -5,7 +5,7 @@ package controllers
 
 import (
   "github.com/astaxie/beego"
-  "<%= sname %>/models"
+  "<%= _.slugify(baseName) %>/models"
   "strconv"
 )
 
