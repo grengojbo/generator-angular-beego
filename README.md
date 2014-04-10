@@ -6,15 +6,16 @@ Beego is an open source framework to build and develop your applications in the 
 
 ## Installation
 
-Install [Git](http://git-scm.com), [node.js](http://nodejs.org), and [Go](http://golang.org/).
+Install [Git](http://git-scm.com), Mercurial, Bzr, Subversion, [node.js](http://nodejs.org), and [Go](http://golang.org/).
 
 Install Yeoman:
 
-    npm install -g yo
+    npm install -g grunt-cli bower yo 
 
 Install the Angular-Go-Martini generator:
 
     npm install -g generator-beego
+    npm install -g ./generator-beego
 
 ## Creating a Beego service
 
@@ -47,6 +48,8 @@ The Grunt server supports hot reloading of client-side HTML/CSS/Javascript file 
 
 ## For developer
 
+go get github.com/astaxie/beego
+go get github.com/beego/bee
 go get github.com/nsf/gocode
 go get code.google.com/p/go.tools/godoc
 go get code.google.com/p/go.tools/cmd/godoc
