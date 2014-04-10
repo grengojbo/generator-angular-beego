@@ -116,15 +116,15 @@ Generator.prototype.addScriptToIndex = function (script) {
   }
 };
 
-Generator.prototype.addApiToRoute = function (script) {
+Generator.prototype.addApiToRoute = function (script, cname) {
   try {
     var appPath = this.env.options.appPath;
-    var fullPath = path.join(appPath, 'router.go');
+    var fullPath = path.join('routers/router.go');
     angularUtils.rewriteFile({
       file: fullPath,
       needle: '// addController',
       splicable: [
-        'beego.RESTRouter("/api/v1/'+ script +'", &controllers.<%= modelName %>ServiceController{})\n\t// addController'
+        'beego.RESTRouter("/api/v1/'+ script +'", &controllers.' + cname + 'Controller{})\n'
       ]
     });
   } catch (e) {

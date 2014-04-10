@@ -23,11 +23,13 @@ Generator.prototype.createControllerFiles = function createControllerFiles() {
   var controllerDir = 'controllers/';
   var modelsDir = 'models/'
   this.modelName = this.name;
+  this.cameledName = this._.camelize(this.name);  // jbo-app -> jboApp
+  this.classedName = this._.classify(this.name); // jbo-app -> JboApp
   this.autorName = 'Oleg Dolya';
   this.sname = this._.slugify(this.name);
   this.template('controllers/_example.go', controllerDir + this.sname + '.go');
   this.template('models/_example.go', modelsDir + this.sname + '.go');
   // this.appTemplate('service/factory', 'scripts/services/' + this.name);
   // this.testTemplate('spec/service', 'services/' + this.name);
-  this.addScriptToIndex(this.sname);
+  this.addApiToRoute(this.sname, this.classedName);
 };

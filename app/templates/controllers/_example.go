@@ -5,15 +5,15 @@ package controllers
 
 import (
   "github.com/astaxie/beego"
-  "<%= _.slugify(baseName) %>/models"
+  "<%= sname %>/models"
   "strconv"
 )
 
-type <%= modelName %>ServiceController struct {
+type <%= classedName %>Controller struct {
   baseController
 }
 
-func (this *<%= modelName %>ServiceController) Get() {
+func (this *<%= classedName %>Controller) Get() {
   // page, _ := this.GetInt("page")
   // page_size, _ := this.GetInt("rows")
   sort := this.GetString("sort")
@@ -24,16 +24,16 @@ func (this *<%= modelName %>ServiceController) Get() {
       sort = "-" + sort
     }
   } else {
-    sort = "Id"
+    sort = "ID"
   }
-  beego.Debug("API <%= modelName %>ServiceController metod GET isLogin: ", this.isLogin)
+  beego.Debug("API <%= classedName %>Controller metod GET isLogin: ", this.isLogin)
   objectId := this.Ctx.Input.Params[":objectId"]
   if this.isLogin {
     if objectId != "" {
       id, err := strconv.Atoi(objectId)
       if err == nil {
         // TODO: заменить function полчения одной записи
-        ob, err := models.Get<%= modelName %>(int64(id))
+        ob, err := models.Get<%= classedName %>(int64(id))
         if err != nil {
           mess := "Is not row ID:"
           this.Data["json"] = &map[string]interface{}{"error": true, "message": mess}
@@ -43,7 +43,7 @@ func (this *<%= modelName %>ServiceController) Get() {
       }
     } else {
       // TODO: заменить function полчения списка записей
-      ob, cnt := models.Get<%= modelName %>List(sort)
+      ob, cnt := models.Get<%= classedName %>List(sort)
       this.Data["json"] = &map[string]interface{}{"count": cnt, "next": nil, "previous": nil, "results": &ob}
     }
   } else {

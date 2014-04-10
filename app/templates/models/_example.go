@@ -12,20 +12,20 @@ import (
 	"time"
 )
 
-type <%= modelName %> struct {
-	Id      int64     `orm:"auto;pk"`
+type <%= classedName %> struct {
+	ID      int64     `orm:"auto;pk"`
 	Name    string    `orm:"size(255);null;index"`
 	Created time.Time `orm:"auto_now_add;type(datetime);null"`
 	Updated time.Time `orm:"auto_now;type(datetime);null"`
 }
 
-func (o *<%= modelName %>) TableName() string {
-	return "<%= _.slugify(baseName) %>"
+func (o *<%= classedName %>) TableName() string {
+	return "<%= sname %>"
 }
 
-func Get<%= modelName %>(ObjectId int64) (object <%= modelName %>, err error) {
+func Get<%= classedName %>(ObjectID int64) (object <%= classedName %>, err error) {
 	o := orm.NewOrm()
-	object = <%= modelName %>{Id: ObjectId}
+	object = <%= classedName %>{ID: ObjectID}
 	err = o.Read(&object)
 	if err == orm.ErrNoRows {
 		return object, errors.New("No result found.")
@@ -36,16 +36,16 @@ func Get<%= modelName %>(ObjectId int64) (object <%= modelName %>, err error) {
 	}
 }
 
-func Get<%= modelName %>List(sort string) (objects []orm.Params, count int64) {
+func Get<%= classedName %>List(sort string) (objects []orm.Params, count int64) {
 	o := orm.NewOrm()
-	p := new(<%= modelName %>)
+	p := new(<%= classedName %>)
 	count, err := o.QueryTable(p).OrderBy(sort).Values(&objects)
 	if err == nil {
-		beego.Debug("GetExampleList Result count: ", count)
+		beego.Debug("Get<%= classedName %>List Result count: ", count)
 	}
 	return objects, count
 }
 
 func init() {
-	orm.RegisterModel(new(<%= modelName %>))
+	orm.RegisterModel(new(<%= classedName %>))
 }
