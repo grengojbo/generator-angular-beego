@@ -9,7 +9,6 @@ import (
 )
 
 func init(){
-  beego.RESTRouter("/api/v1/<%= _.slugify(baseName) %>", &controllers.<%= modelName %>ServiceController{})
 	beego.Router("/", &controllers.MainController{})
   // addController
 }

@@ -12,6 +12,10 @@ import (
 	"time"
 )
 
+var (
+	<%= classedName %>s map[string]*<%= classedName %>
+)
+
 type <%= classedName %> struct {
 	ID      int64     `orm:"auto;pk"`
 	Name    string    `orm:"size(255);null;index"`
@@ -21,6 +25,35 @@ type <%= classedName %> struct {
 
 func (o *<%= classedName %>) TableName() string {
 	return "<%= sname %>"
+}
+
+func (o *<%= classedName %>) Insert() error {
+	if _, err := orm.NewOrm().Insert(o); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *<%= classedName %>) Read(fields ...string) error {
+	if err := orm.NewOrm().Read(o, fields...); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *<%= classedName %>) Update(fields ...string) error {
+	fields = append(fields, "Updated")
+	if _, err := orm.NewOrm().Update(o, fields...); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *<%= classedName %>) Delete() error {
+	if _, err := orm.NewOrm().Delete(o); err != nil {
+		return err
+	}
+	return nil
 }
 
 func Get<%= classedName %>(ObjectID int64) (object <%= classedName %>, err error) {
@@ -44,6 +77,22 @@ func Get<%= classedName %>List(sort string) (objects []orm.Params, count int64) 
 		beego.Debug("Get<%= classedName %>List Result count: ", count)
 	}
 	return objects, count
+}
+
+func GetAll<%= classedName %>(sort string) (objects []*<%= classedName %>, cnt int64, err error) {
+	o := orm.NewOrm()
+
+	objects = make([]*<%= classedName %>, 0)
+	table := new(<%= classedName %>)
+	qs := o.QueryTable(table)
+	cnt, err = qs.OrderBy(sort).All(&objects)
+	
+	return objects, cnt, err
+}
+
+func Delete<%= classedName %>(id int64) error {
+	ob := &<%= classedName %>{ID: id}
+	return ob.Delete()
 }
 
 func init() {
