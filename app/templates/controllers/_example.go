@@ -4,8 +4,10 @@
 package controllers
 
 import (
+  "encoding/json"
+  "fmt"
   "github.com/astaxie/beego"
-  "<%= _.slugify(baseName) %>/models"
+  "<%= baseName %>/models"
   "strconv"
 )
 
@@ -14,8 +16,8 @@ type <%= classedName %>Controller struct {
 }
 
 // <%= classedName %>Controller metod Get
-// GET http://localhost:8080/api/v3/<%= sname %> # All result
-// GET http://localhost:8080/api/v3/<%= sname %>/<objectId> # One result
+// GET http://localhost:8080<%= routerName %> # All result
+// GET http://localhost:8080<%= routerName %><objectId> # One result
 func (t *<%= classedName %>Controller) Get() {
   // page, _ := t.GetInt("page")
   // page_size, _ := t.GetInt("rows")
@@ -29,7 +31,7 @@ func (t *<%= classedName %>Controller) Get() {
   } else {
     sort = "-created"
   }
-  beego.Debug("API LiqPayController metod GET isLogin: ", t.isLogin)
+  // beego.Debug("API <%= classedName %>Controller metod GET isLogin: ", t.isLogin)
   objectId := t.Ctx.Input.Params[":objectId"]
   // if t.isLogin {
   if len(objectId) > 0 {
@@ -63,18 +65,24 @@ func (t *<%= classedName %>Controller) Get() {
   t.ServeJson()
 }
 
-// <%= classedName %>Controller metod Post
-// POST http://localhost:8080/api/v1/<%= sname %>/
-func (this *<%= classedName %>Controller) Post() {
-  var ob models.Object
-  json.Unmarshal(this.Ctx.Input.RequestBody, &ob)
-  objectid := models.AddOne(ob)
-  this.Data["json"] = map[string]string{"ObjectId": objectid}
-  this.ServeJson()
+// <%= classedName %>Controller metod Post (added a new record)
+// POST http://localhost:8080<%= routerName %>
+func (t *<%= classedName %>Controller) Post() {
+  var ob models.<%= classedName %>
+  json.Unmarshal(t.Ctx.Input.RequestBody, &ob)
+  // beego.Debug("POST <%= classedName %>Controller", ob)
+  if err := ob.Insert(); err != nil {
+    // beego.Error("Error:", err)
+    mess := fmt.Sprintf("Is not insert: %v", ob)
+    t.Data["json"] = &map[string]interface{}{"error": true, "message": mess}
+  }
+  t.Data["json"] = &map[string]interface{}{"error": false, "message": ob}
+  t.ServeJson()
 }
 
-// <%= classedName %>Controller metod Put
-// PUT http://localhost:8080/api/v1/<%= sname %>/
+
+// <%= classedName %>Controller metod Put (update row)
+// PUT http://localhost:8080<%= routerName %>
 func (this *<%= classedName %>Controller) Put() {
   objectId := this.Ctx.Input.Params[":objectId"]
   var ob models.Object

@@ -17,14 +17,14 @@ var (
 )
 
 type <%= classedName %> struct {
-	ID      int64     `orm:"auto;pk"`
+	ID      int64     `orm:"column(id);auto;pk"`
 	Name    string    `orm:"size(255);null;index"`
 	Created time.Time `orm:"auto_now_add;type(datetime);null"`
 	Updated time.Time `orm:"auto_now;type(datetime);null"`
 }
 
 func (o *<%= classedName %>) TableName() string {
-	return "<%= sname %>"
+	return "<%= tableName %>"
 }
 
 func (o *<%= classedName %>) Insert() error {

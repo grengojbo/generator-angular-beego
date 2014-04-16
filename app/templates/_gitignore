@@ -26,6 +26,8 @@ _cgo_export.*
 _testmain.go
 
 tmp/
+.tmp/
+app/bower_components
 node_modules
 <%= _.camelize(baseName) %>
 <%= _.camelize(baseName) %>.exe

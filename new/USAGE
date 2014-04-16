@@ -1,0 +1,9 @@
+Description:
+  Creates a new Beego controller, page
+
+Example:
+  yo begoo:new thing
+
+  This will create:
+    create app/views/thing.tpl
+    create controllers/thing.go

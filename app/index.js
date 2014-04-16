@@ -5,7 +5,8 @@ var util = require('util'),
     _ = require('lodash'),
     _s = require('underscore.string'),
     pluralize = require('pluralize'),
-    asciify = require('asciify');
+    asciify = require('asciify'),
+    gitconfig = require('git-config');
 
 var AngularGoMartiniGenerator = module.exports = function AngularGoMartiniGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -22,71 +23,93 @@ util.inherits(AngularGoMartiniGenerator, yeoman.generators.Base);
 AngularGoMartiniGenerator.prototype.askFor = function askFor() {
 
   var cb = this.async();
+  // have Yeoman greet the user.
+  console.log(this.yeoman);
 
-  console.log('\n'+
-'                                                                                \n' +
-'                  ,===============           :==============~                   \n' +
-'                 :=============~               :==============                  \n' +
-'                 =============,                  =============,                 \n' +
-'                 ============,                    ============,                 \n' +
-'                 ============        =====,       :===========,                 \n' +
-'                 ===========,      ,=======~       ===========,                 \n' +
-'                 ===========       =========       ===========,                 \n' +
-'                 ======~,          =========           :======,                 \n' +
-'                 ====   ~======~===========:     ~=====,  ~===,                 \n' +
-'                 ==, :===================~       :========  ==,                 \n' +
-'                 =  =================,           ==========  =,                 \n' +
-'                 , =======~,,~========           ,,,:=======  ,                 \n' +
-'                  ~=====,      :=====,                 ======                   \n' +
-'                  =====:        :=====   :=====         =====                   \n' +
-'                  =====,        ,=====   :=====         =====,                  \n' +
-'                  =====~        ,=~:=~   ,=====         =====                   \n' +
-'                  :=====~                 ======,     :======                   \n' +
-'                 : ~=======~~=           :=========~========  ,                 \n' +
-'                 =, ~=========            =================  =,                 \n' +
-'                 ==~  ========       ====================  ,==,                 \n' +
-'                 ====:  ,~====     ,========~,~:,~===~,  ,====,                 \n' +
-'                 =======~,         =========,        ,:=======,                 \n' +
-'                 ===========       =========       ===========,                 \n' +
-'                 ===========:       =======:       ===========,                 \n' +
-'                 ============        ,===~        :===========,                 \n' +
-'                 ============~                   ,============,                 \n' +
-'                 =============~                 ,=============,                 \n' +
-'                 ,==============,              ==============~                  \n' +
-'                   :==============~         :==============~                    \n' +
-'                                                                                \n' +
-'                      :~~~,                                                     \n' +
-'                   :=========                                                   \n' +
-'                  =====~:~====~===== =====:=======: ==========,                 \n' +
-'                 ====      ,======== =====:=========~=========,                 \n' +
-'                 ===:           ===   ===, ===   ====== ==~,==,                 \n' +
-'                 ===,           ===   ===, ===   ===,  ,===                     \n' +
-'                 ====       :::,===   ===, ========~   ,===                     \n' +
-'                 ,====:   :==== ===   ===, =======     ,===                     \n' +
-'                   ===========  ~======== ==== :====~ ~=====                    \n' +
-'                     ======~     :======  ====  ,===~ ~=====                    \n' +
-'                                                                                \n' +
-  	'\n');
+  var config = gitconfig.sync();
+
   console.log('\n' +
     '+-+-+-+-+-+-+-+ +-+-+ +-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+\n' +
     '|   angular    | go  |     beego     |    generator     |\n' +
     '+-+-+-+-+-+-+-+ +-+-+ +-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+\n' +
     '\n');
 
-  var prompts = [{
-    type: 'input',
-    name: 'baseName',
-    message: 'What is the name of your application?',
-    default: 'myapp'
-  }];
+  var prompts = [
+    {
+      type: 'input',
+      name: 'baseName',
+      message: 'What is the name of your application?',
+      default: path.basename(process.cwd())
+    }, {
+      type: 'input',
+      name: 'moduleDesc',
+      message: 'Module description'
+    }, {
+      type: 'input',
+      name: 'githubName',
+      message: 'Your github username',
+      default: (config.github && config.github.user) || ''
+    }, {
+    //   name: 'homepage',
+    //   message: 'Homepage'
+    // }, {
+    //   name: 'license',
+    //   message: 'License',
+    //   default: 'MIT'
+    // }, {
+    //   name: 'authorName',
+    //   message: 'Author\'s Name'
+    // }, {
+    //   name: 'authorEmail',
+    //   message: 'Author\'s Email'
+    // }, {
+    //   name: 'authorUrl',
+    //   message: 'Author\'s Homepage' 
+    // }, {
+      type: 'input',
+      name: 'author',
+      message: 'Author name',
+      default:
+        ((config.user && config.user.name) || '') + 
+        (' <' + ((config.user && config.user.email) || '') + '>')
+    }
+  ];
+
+  this.currentYear = (new Date()).getFullYear();
 
   this.prompt(prompts, function (props) {
     this.baseName = props.baseName;
+    this.sname = this._.slugify(this.baseName);
+    this.safeSlugname = this.slugname.replace(
+      /-([a-z])/g,
+      function (g) { return g[1].toUpperCase(); }
+    );
+    this.moduleVarName = this._.camelize(props.baseName);
+    this.moduleDesc = props.moduleDesc;
+    // this.keywords = props.keywords;
+    this.githubName = props.githubName;
+    this.author = props.author;
+    this.autorName = props.author;
+    this.copyrightName = props.author.replace(/<[^>]*?>/gm, '').trim();
     this.goBin = process.env.GOROOT+'/bin';
     this.baseDir = './';
     this.appPort = 8080;
     this.modelName = 'Example';
-    this.autorName = 'Oleg Dolya';
+    // this.autorName = 'Oleg Dolya';
+    if(!props.githubName){
+      this.repoUrl = 'https://github.com/' + props.githubName + '/' + this.sname;
+    } else {
+      this.repoUrl = 'user/repo';
+    }
+
+    // if (!props.homepage) {
+    //   props.homepage = this.repoUrl;
+    // }
+
+    this.dequote = function (str) {
+      return str.replace(/\"/gm, '\\"');
+    };
+    
     cb();
   }.bind(this));
 };

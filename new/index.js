@@ -24,6 +24,7 @@ Generator.prototype.askFor = function askFor() {
   this.modelName = this.name;
   this.cameledName = this._.camelize(this.name);  // jbo-app -> jboApp
   this.classedName = this._.classify(this.name); // jbo-app -> JboApp
+  // this.autorName = 'Oleg Dolya';
   this.sname = this._.slugify(this.name);
   
   var prompts = [
@@ -31,26 +32,27 @@ Generator.prototype.askFor = function askFor() {
       type: 'input',
       name: 'pRouter',
       message: 'Routing url',
-      default: '/api/v1/' + this.sname + '/'
+      default: '/' + this.sname + '/'
     },
     {
       type: 'input',
-      name: 'pClassName',
-      message: 'Prefix Controller Name',
-      default: 
-    }
+      name: 'pTitle',
+      message: 'Page Title',
+      default: 'page title'
+    },
     {
       type: 'input',
-      name: 'pTableName',
-      message: 'SQL Table Name',
-      default: this.sname
+      name: 'pMenu',
+      message: 'Menu Name',
+      default: 'Home'
     }
   ];
 
   this.prompt(prompts, function (props) {
     this.routerName = props.pRouter;
-    this.classedName = props.pClassName;
-    this.tableName = props.pTableName;
+    // this.autorName = 'Oleg Dolya';
+    this.tTitle = props.pTitle;
+    this.tMenu = props.pMenu;
 
     this.dequote = function (str) {
       return str.replace(/\"/gm, '\\"');
@@ -59,17 +61,22 @@ Generator.prototype.askFor = function askFor() {
     cb();
   }.bind(this));
 };
+
 Generator.prototype.createControllerFiles = function createControllerFiles() {
-  var controllerDir = 'controllers/';
-  var modelsDir = 'models/';
-  this.modelName = this.name;
-  this.cameledName = this._.camelize(this.name);  // jbo-app -> jboApp
-  this.classedName = this._.classify(this.name); // jbo-app -> JboApp
-  this.autorName = 'Oleg Dolya';
-  this.sname = this._.slugify(this.name);
-  this.template('controllers/_example.go', controllerDir + this.sname + '.go');
-  this.template('models/_example.go', modelsDir + this.sname + '.go');
+  // var controllerDir = 'controllers/';
+  // var modelsDir = 'models/';
+
+  // this.mkdir(viewsDir);
+  // this.mkdir(controllers);
+
+
+  this.beegoTemplate('views/_new.tpl', this.sname);
+  // this.beegoController('views/_new.tpl', this.sname);
+  this.template('controllers/_new.go', this.controllerDir + this.sname + '.go');
+  // this.template('models/_example.go', modelsDir + this.sname + '.go');
   // this.appTemplate('service/factory', 'scripts/services/' + this.name);
   // this.testTemplate('spec/service', 'services/' + this.name);
-  this.addApiToRoute(this.sname, this.classedName);
+  this.addMenuItem(this.tMenu, this.routerName, 'nav.tpl')
+  this.addToRoute(this.routerName, this.classedName);
+  // console.log('\nUnable to find '.yellow + fullPath + '. Reference to '.yellow + script + '.js ' + 'not added.\n'.yellow);
 };

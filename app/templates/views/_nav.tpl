@@ -1,4 +1,7 @@
-<ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav">
+    <li {{<if .IsHome>}}class="active"{{<end>}}><a href="/">{{<i18n .Lang "home">}}</a></li>
+      <!-- menu-item -->
+  </ul><ul class="nav navbar-nav navbar-right">
   {{<if .IsLogin>}}
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">IMG AVATAR</a>

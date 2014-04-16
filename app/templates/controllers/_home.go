@@ -1,4 +1,4 @@
-// Copyright 2014 Oleg Dolya. All rights reserved.
+// Copyright 2014 <%= autorName %>. All rights reserved.
 // Use of this source code is governed by the MIT license
 // that can be found in the LICENSE file.
 package controllers
@@ -13,5 +13,5 @@ func (this *MainController) Get() {
 	this.Data["AppUrl"] = '/'
 	this.Data["IsHome"] = true
 	this.Data["Email"] = "astaxie@gmail.com"
-	this.TplNames = "index.tpl"
+	this.TplNames = "index.html"
 }

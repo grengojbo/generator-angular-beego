@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var angularUtils = require('./util.js');
+var gitconfig = require('git-config');
 
 module.exports = Generator;
 
@@ -10,10 +11,14 @@ function Generator() {
   yeoman.generators.NamedBase.apply(this, arguments);
 
   this.modelsDir = 'models/';
+  this.controllerDir = 'controllers/';
   this.modulesDir = 'modules/'
+  this.viewsDir = 'views/';
   this.mkdir(this.modelsDir);
   this.mkdir(this.modulesDir);
+  this.mkdir(this.viewsDir);
 
+  this.pkg = JSON.parse(this.readFileAsString(path.join(process.cwd(), 'package.json')));
   try {
     this.appname = require(path.join(process.cwd(), 'bower.json')).name;
   } catch (e) {
@@ -23,6 +28,11 @@ function Generator() {
     this.baseName = require(path.join(process.cwd(), 'generator.json')).baseName;
   } catch (e) {
     this.baseName = 'myapp';
+  }
+  try {
+    this.autorName = require(path.join(process.cwd(), 'package.json')).author;
+  } catch (e) {
+    this.autorName = 'Oleg Dolya';
   }
   // try {
   //   this.autorName = require(path.join(process.cwd(), 'generator.json')).autorName;
@@ -79,6 +89,13 @@ function Generator() {
 
 util.inherits(Generator, yeoman.generators.NamedBase);
 
+Generator.prototype.beegoTemplate = function (src, dest) {
+  yeoman.generators.Base.prototype.template.apply(this, [
+    src,
+    path.join(this.env.options.appPath, this.viewsDir, dest) + '.tpl'
+  ]);
+};
+
 Generator.prototype.appTemplate = function (src, dest) {
   yeoman.generators.Base.prototype.template.apply(this, [
     src + this.scriptSuffix,
@@ -116,6 +133,22 @@ Generator.prototype.addScriptToIndex = function (script) {
   }
 };
 
+Generator.prototype.addMenuItem = function (mname, murl, script) {
+  try {
+    var appPath = this.env.options.appPath;
+    var fullPath = path.join(appPath, this.viewsDir, script);
+    angularUtils.rewriteFile({
+      file: fullPath,
+      needle: '<!-- menu-item -->',
+      splicable: [
+        '<li><a href="' + murl + '">' + mname + '</a></li>'
+      ]
+    });
+  } catch (e) {
+    console.log('\nUnable to find '.yellow + fullPath + '. Reference to '.yellow + script + '.js ' + 'not added.\n'.yellow);
+  }
+};
+
 Generator.prototype.addApiToRoute = function (script, cname) {
   try {
     var appPath = this.env.options.appPath;
@@ -124,7 +157,23 @@ Generator.prototype.addApiToRoute = function (script, cname) {
       file: fullPath,
       needle: '// addController',
       splicable: [
-        'beego.RESTRouter("/api/v1/'+ script +'", &controllers.' + cname + 'Controller{})\n'
+        'beego.RESTRouter("/api/v1/'+ script +'", &controllers.' + cname + 'Controller{})'
+      ]
+    });
+  } catch (e) {
+    console.log('\nUnable to find '.yellow + fullPath + '. Reference to '.yellow + script + '.js ' + 'not added.\n'.yellow);
+  }
+};
+
+Generator.prototype.addToRoute = function (script, cname) {
+  try {
+    var appPath = this.env.options.appPath;
+    var fullPath = path.join('routers/router.go');
+    angularUtils.rewriteFile({
+      file: fullPath,
+      needle: '// addController',
+      splicable: [
+        'beego.Router("'+ script +'", &controllers.' + cname + 'Controller{})'
       ]
     });
   } catch (e) {

@@ -6,8 +6,8 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"github.com/beego/i18n"
-	"<%= _.slugify(baseName) %>/models"
-	"<%= _.slugify(baseName) %>/modules/auth"
+	"<%= sname %>/models"
+	"<%= _sname %>/modules/auth"
 	"github.com/grengojbo/beego/modules/utils"
 	"strings"
 )

@@ -1,11 +1,11 @@
 {{<template "base.tpl" .>}}
 {{<define "meta">}}
-  <title>{{<.Website>}}</title>
+  <title>{{<.Title>}} : {{<.Website>}}</title>
 {{<end>}}
 {{<template "header.tpl" .>}}
 {{<define "body">}}
-  <section class="hero-unit">
-    <div class="container" ng-view></div>
+  <section class="container" ui-view >
+  Loading...
   </section>
 {{<end>}}
 {{<template "footer.tpl" .>}}

@@ -10,7 +10,7 @@ import (
   "github.com/astaxie/beego/validation"
   "github.com/beego/i18n"
   "html/template"
-  "<%= _.slugify(baseName) %>/models"
+  "<%= sname %>/models"
   "github.com/grengojbo/beego/modules/utils"
   "net/url"
   "reflect"

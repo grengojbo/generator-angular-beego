@@ -48,12 +48,14 @@ The Grunt server supports hot reloading of client-side HTML/CSS/Javascript file 
 
 ## For developer
 
-go get github.com/astaxie/beego
-go get github.com/beego/bee
-go get github.com/nsf/gocode
-go get code.google.com/p/go.tools/godoc
-go get code.google.com/p/go.tools/cmd/godoc
-go get code.google.com/p/go.tools/cmd/goimports
+go get -v github.com/astaxie/beego
+go get -v github.com/beego/bee
+go get -v github.com/nsf/gocode
+go get -v code.google.com/p/go.tools/godoc
+go get -v code.google.com/p/go.tools/cmd/godoc
+go get -v code.google.com/p/go.tools/cmd/goimports
+go get -v code.google.com/p/go.tools/cmd/gotype
+go get -v github.com/bytbox/golint
 
 
 ### Разработка с помощью Sublime Text 3 + GoSublime + goimports

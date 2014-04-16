@@ -1,8 +1,8 @@
 Description:
-    Creates a new Beego controller
+    Creates a new Beego API controller
 
 Example:
-    yo begoo:controller Thing
+    yo begoo:api thing
 
     This will create:
         app/scripts/controllers/thing.go

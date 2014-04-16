@@ -13,11 +13,7 @@
 
    <!-- Collect the nav links, forms, and other content for toggling -->
    <div class="collapse navbar-collapse navbar-ex1-collapse">
-     <ul class="nav navbar-nav">
-       <li {{<if .IsHome>}}class="active"{{<end>}}><a href="/">{{<i18n .Lang "home">}}</a></li>
-       <li><a href="/about/">{{<i18n .Lang "about">}}</a></li>
-     </ul>
-     {{<template "nav-login.tpl" .>}}
+     {{<template "nav.tpl" .>}}
    </div>
    <!-- /.navbar-collapse -->
  </div>
