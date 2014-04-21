@@ -32,14 +32,12 @@ Generator.prototype.askFor = function askFor() {
       name: 'pRouter',
       message: 'Routing url',
       default: '/api/v1/' + this.sname + '/'
-    },
-    {
+    }, {
       type: 'input',
       name: 'pClassName',
       message: 'Prefix Controller Name',
-      default: 
-    }
-    {
+      default: this.classedName
+    }, {
       type: 'input',
       name: 'pTableName',
       message: 'SQL Table Name',

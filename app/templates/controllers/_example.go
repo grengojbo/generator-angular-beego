@@ -43,6 +43,7 @@ func (t *<%= classedName %>Controller) Get() {
     } else {
       ob, err := models.Get<%= classedName %>(id)
       if err != nil {
+        t.Ctx.Output.SetStatus(404)
         mess := fmt.Sprintf("Is not row ID: %d", id)
         t.Data["json"] = &map[string]interface{}{"error": true, "message": mess}
       } else {
@@ -83,18 +84,20 @@ func (t *<%= classedName %>Controller) Post() {
 
 // <%= classedName %>Controller metod Put (update row)
 // PUT http://localhost:8080<%= routerName %>
-func (this *<%= classedName %>Controller) Put() {
-  objectId := this.Ctx.Input.Params[":objectId"]
-  var ob models.Object
-  json.Unmarshal(this.Ctx.Input.RequestBody, &ob)
+func (t *<%= classedName %>Controller) Put() {
+  // objectId := t.Ctx.Input.Params[":objectId"]
+  var ob models.<%= classedName %>
+  json.Unmarshal(t.Ctx.Input.RequestBody, &ob)
 
-  err := models.Update(objectId, ob.Score)
+  err := ob.Update(ob.Name)
   if err != nil {
-    this.Data["json"] = err
+    mess := fmt.Sprintf("Is not update: %v", ob)
+    t.Data["json"] = &map[string]interface{}{"error": true, "message": mess}
+    t.Data["json"] = err
   } else {
-    this.Data["json"] = "update success!"
+    t.Data["json"] = &map[string]interface{}{"error": false, "message": ob}
   }
-  this.ServeJson()
+  t.ServeJson()
 }
 
 // <%= classedName %>Controller metod Delete

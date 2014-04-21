@@ -56,6 +56,7 @@ func (o *<%= classedName %>) Delete() error {
 	return nil
 }
 
+// Get<%= classedName %> returns one record from the database
 func Get<%= classedName %>(ObjectID int64) (object <%= classedName %>, err error) {
 	o := orm.NewOrm()
 	object = <%= classedName %>{ID: ObjectID}
@@ -69,6 +70,7 @@ func Get<%= classedName %>(ObjectID int64) (object <%= classedName %>, err error
 	}
 }
 
+// Get<%= classedName %>List returns all records from the database, sorted in the field sort
 func Get<%= classedName %>List(sort string) (objects []orm.Params, count int64) {
 	o := orm.NewOrm()
 	p := new(<%= classedName %>)
