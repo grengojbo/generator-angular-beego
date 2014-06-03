@@ -16,6 +16,7 @@ var (
 	<%= classedName %>s map[string]*<%= classedName %>
 )
 
+// <%= classedName %> model
 type <%= classedName %> struct {
 	ID      int64     `orm:"column(id);auto;pk"`
 	Name    string    `orm:"size(255);null;index"`
@@ -23,10 +24,12 @@ type <%= classedName %> struct {
 	Updated time.Time `orm:"auto_now;type(datetime);null"`
 }
 
+// Set ORM Table name
 func (o *<%= classedName %>) TableName() string {
 	return "<%= tableName %>"
 }
 
+// Insert new record to <%= classedName %> model
 func (o *<%= classedName %>) Insert() error {
 	if _, err := orm.NewOrm().Insert(o); err != nil {
 		return err
@@ -34,6 +37,12 @@ func (o *<%= classedName %>) Insert() error {
 	return nil
 }
 
+// Read only record from <%= classedName %> model
+// ob := models.<%= classedName %>{ID: 1, Name: "NoName"}
+// if err := ob.Read("ID", "Name"); err != nil {
+// 	beego.Error("<%= classedName %> Read:", err.Error())
+// }
+// beego.Debug("<%= classedName %> Read:", ob.Created)
 func (o *<%= classedName %>) Read(fields ...string) error {
 	if err := orm.NewOrm().Read(o, fields...); err != nil {
 		return err
@@ -41,14 +50,24 @@ func (o *<%= classedName %>) Read(fields ...string) error {
 	return nil
 }
 
+// Update records from <%= classedName %> model
+// ob.Status = 1
+// if err := ob.Update("Status"); err != nil {
+//   beego.Error("No update id:", ob.ID, err.Error())
+// }
 func (o *<%= classedName %>) Update(fields ...string) error {
-	fields = append(fields, "Updated")
+	// fields = append(fields, "Updated")
 	if _, err := orm.NewOrm().Update(o, fields...); err != nil {
 		return err
 	}
 	return nil
 }
 
+// Delete records from <%= classedName %> model
+// ob := models.<%= classedName %>{ID: 1}
+// if err := pay.Delete(); err != nill {
+// 	beego.Error("<%= classedName %> Delete", err.Error())
+// }
 func (o *<%= classedName %>) Delete() error {
 	if _, err := orm.NewOrm().Delete(o); err != nil {
 		return err
@@ -71,6 +90,7 @@ func Get<%= classedName %>(ObjectID int64) (object <%= classedName %>, err error
 }
 
 // Get<%= classedName %>List returns all records from the database, sorted in the field sort
+// Return []orm.Params
 func Get<%= classedName %>List(sort string) (objects []orm.Params, count int64) {
 	o := orm.NewOrm()
 	p := new(<%= classedName %>)
@@ -81,6 +101,11 @@ func Get<%= classedName %>List(sort string) (objects []orm.Params, count int64) 
 	return objects, count
 }
 
+// GetAll<%= classedName %>List returns all records from the database, sorted in the field sort
+// Return:
+// 					objects []*<%= classedName %>
+// 					cnt     Count rows
+// 					err     Error
 func GetAll<%= classedName %>(sort string) (objects []*<%= classedName %>, cnt int64, err error) {
 	o := orm.NewOrm()
 
@@ -92,6 +117,7 @@ func GetAll<%= classedName %>(sort string) (objects []*<%= classedName %>, cnt i
 	return objects, cnt, err
 }
 
+// Delete record from ID int64
 func Delete<%= classedName %>(id int64) error {
 	ob := &<%= classedName %>{ID: id}
 	return ob.Delete()
